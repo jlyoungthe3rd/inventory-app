@@ -1,7 +1,18 @@
-import './App.css';
+import { Bag } from './components/Bag';
+import { EquippedInventory } from './components/EquippedInventory';
+import { InventoryProvider } from './components/InventoryProvider';
+import { TotalStats } from './components/TotalStats';
+import './index.css';
 
-function App() {
-  return <></>;
-}
+const InventoryManager = () => {
+  return (
+    <InventoryProvider>
+      <h1>Inventory Manager</h1>
+      <TotalStats />
+      <EquippedInventory />
+      <Bag />
+    </InventoryProvider>
+  );
+};
 
-export default App;
+export default InventoryManager;
