@@ -1,4 +1,4 @@
-import { Bag } from './components/Bag';
+import { Bag } from './components/Bag/Bag';
 import { EquippedInventory } from './components/EquippedInventory';
 import { InventoryProvider } from './components/InventoryProvider';
 import { TotalStats } from './components/TotalStats';

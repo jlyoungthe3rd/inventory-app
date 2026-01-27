@@ -2,10 +2,12 @@ import { createContext } from "react";
 import type { Item, EquipSlot } from "../types";
 
 export interface InventoryContextType {
-    bag: Item[];
+    isLoading: boolean
+    items: Record<string, Item>
+    bag: string[];
     equipped: Record<EquipSlot, Item | null>;
     totals: Item['stats'];
-    equip: (item: Item) => void;
+    equip: (itemId: Item['id'], slot: Item['slot']) => void;
     unEquip: (slot: EquipSlot) => void;
 }
 

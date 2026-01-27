@@ -1,0 +1,30 @@
+[
+    {
+        "id": "1",
+        "name": "Iron Sword",
+        "rarity": "COMMON",
+        "slot": "MAIN_HAND",
+        "stats": {
+            "str": 5
+        }
+    },
+    {
+        "id": "2",
+        "name": "Wood Shield",
+        "rarity": "COMMON",
+        "slot": "OFF_HAND",
+        "stats": {
+            "def": 3
+        }
+    },
+    {
+        "id": "3",
+        "name": "Steel Chestplate",
+        "rarity": "RARE",
+        "slot": "CHEST",
+        "stats": {
+            "def": 15,
+            "hp": 20
+        }
+    }
+]

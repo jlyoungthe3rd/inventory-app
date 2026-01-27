@@ -1,8 +1,9 @@
-import { useReducer, useCallback, useMemo } from 'react';
+import { useReducer, useCallback, useMemo, useEffect } from 'react';
 import { initialState, inventoryReducer } from '../state/inventoryReducer';
 import { getTotalStats } from '../state/inventoryUtils';
-import type { Item, EquipSlot } from '../types';
+import type { EquipSlot } from '../types';
 import { InventoryContext } from '../context/InventoryContext';
+import { fetchInitialBag } from '../services/itemServices';
 
 export const InventoryProvider = ({
   children,
@@ -11,12 +12,33 @@ export const InventoryProvider = ({
 }) => {
   const [state, dispatch] = useReducer(inventoryReducer, initialState);
 
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const loadItems = async () => {
+      try {
+        const data = await fetchInitialBag();
+        if (!controller.signal.aborted) {
+          dispatch({ type: 'SET_BAG', payload: data });
+        }
+      } catch (err) {
+        if (!controller.signal.aborted) console.log(err);
+      }
+    };
+    loadItems();
+
+    return () => {
+      controller.abort();
+    };
+  }, []);
+
   const equip = useCallback(
-    (item: Item) =>
+    (itemId: string, slot: EquipSlot) => {
       dispatch({
         type: 'EQUIP_ITEM',
-        payload: item,
-      }),
+        payload: { itemId, slot },
+      });
+    },
     [dispatch],
   );
   const unEquip = useCallback(
@@ -33,8 +55,24 @@ export const InventoryProvider = ({
   }, [state.equipped]);
 
   const value = useMemo(() => {
-    return { bag: state.bag, equipped: state.equipped, totals, equip, unEquip };
-  }, [state.bag, state.equipped, totals, equip, unEquip]);
+    return {
+      isLoading: state.isLoading,
+      items: state.items,
+      bag: state.bag,
+      equipped: state.equipped,
+      totals,
+      equip,
+      unEquip,
+    };
+  }, [
+    state.isLoading,
+    state.items,
+    state.bag,
+    state.equipped,
+    totals,
+    equip,
+    unEquip,
+  ]);
 
   return (
     <InventoryContext.Provider value={value}>

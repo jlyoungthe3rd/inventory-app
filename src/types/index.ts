@@ -13,15 +13,19 @@ export interface Item {
         str?: number
         dex?: number
         int?: number
+        def?: number
 
     }
 }
 
 export interface InventoryState {
-    bag: Item[];
+    isLoading: boolean,
+    items: Record<string, Item>
+    bag: string[];
     equipped: Record<EquipSlot, Item | null>;
 }
 
 export type InventoryAction =
-    | { type: 'EQUIP_ITEM', payload: Item }
+    | { type: 'EQUIP_ITEM', payload: { itemId: string, slot: EquipSlot } }
     | { type: 'UNEQUIP_ITEM', payload: EquipSlot }
+    | { type: 'SET_BAG', payload: Item[] }
