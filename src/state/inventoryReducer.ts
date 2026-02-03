@@ -21,9 +21,9 @@ export const inventoryReducer = (
 ): InventoryState => {
   switch (action.type) {
     case 'EQUIP_ITEM': {
-      const { itemId, slot } = action.payload
+      const { itemId, equipSlot } = action.payload
       const itemToEquip = state.items[itemId]
-      const oldItem = state.equipped[slot]
+      const oldItem = state.equipped[equipSlot]
       const newBag = state.bag.filter((id) => id !== itemId)
       if (oldItem) {
         newBag.push(oldItem.id)
@@ -31,12 +31,12 @@ export const inventoryReducer = (
       return {
         ...state,
         bag: newBag,
-        equipped: { ...state.equipped, [slot]: itemToEquip },
+        equipped: { ...state.equipped, [equipSlot]: itemToEquip },
       };
     }
     case 'UNEQUIP_ITEM': {
-      const slot = action.payload;
-      const itemToUnequip = state.equipped[slot];
+      const equipSlot = action.payload;
+      const itemToUnequip = state.equipped[equipSlot];
 
       if (!itemToUnequip) {
         return state
@@ -46,7 +46,7 @@ export const inventoryReducer = (
         bag: [...state.bag, itemToUnequip.id],
         equipped: {
           ...state.equipped,
-          [slot]: null,
+          [equipSlot]: null,
         },
       };
     }

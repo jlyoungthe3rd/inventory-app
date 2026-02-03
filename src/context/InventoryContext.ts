@@ -6,9 +6,9 @@ export interface InventoryContextType {
     items: Record<string, Item>
     bag: string[];
     equipped: Record<EquipSlot, Item | null>;
-    totals: Item['stats'];
-    equip: (itemId: Item['id'], slot: Item['slot']) => void;
-    unEquip: (slot: EquipSlot) => void;
+    statTotals: Item['stats'];
+    equipItem: (itemId: Item['id'], equipSlot: Item['equipSlot']) => void;
+    unEquipItem: (slot: EquipSlot) => void;
 }
 
 export const InventoryContext = createContext<InventoryContextType | undefined>(

@@ -15,7 +15,7 @@ export const Bag = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'NAME' | 'RARITY'>('NAME');
   const [filterRarity, setFilterRarity] = useState<Rarity | 'ALL'>('ALL');
-  const { isLoading, items, bag, equip } = useInventory();
+  const { isLoading, items, bag, equipItem } = useInventory();
 
   const filteredBag = useMemo(() => {
     const allItems = bag.map((id) => items[id]);
@@ -50,7 +50,7 @@ export const Bag = () => {
             <div key={item.id}>
               <button
                 onClick={() => {
-                  equip(item.id, item.slot);
+                  equipItem(item.id, item.equipSlot);
                 }}
               >
                 <span>{item.name}</span>

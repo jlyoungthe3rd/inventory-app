@@ -6,14 +6,13 @@ export interface Item {
     id: string
     name: string
     rarity: Rarity
-    slot: EquipSlot
+    equipSlot: EquipSlot
     stats: {
         hp?: number
         mp?: number
         str?: number
         dex?: number
         int?: number
-        def?: number
 
     }
 }
@@ -26,6 +25,6 @@ export interface InventoryState {
 }
 
 export type InventoryAction =
-    | { type: 'EQUIP_ITEM', payload: { itemId: string, slot: EquipSlot } }
+    | { type: 'EQUIP_ITEM', payload: { itemId: string, equipSlot: EquipSlot } }
     | { type: 'UNEQUIP_ITEM', payload: EquipSlot }
     | { type: 'SET_BAG', payload: Item[] }

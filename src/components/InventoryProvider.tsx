@@ -15,7 +15,7 @@ export const InventoryProvider = ({
   useEffect(() => {
     const controller = new AbortController();
 
-    const loadItems = async () => {
+    const loadInventoryitems = async () => {
       try {
         const data = await fetchInitialBag();
         if (!controller.signal.aborted) {
@@ -25,32 +25,32 @@ export const InventoryProvider = ({
         if (!controller.signal.aborted) console.log(err);
       }
     };
-    loadItems();
+    loadInventoryitems();
 
     return () => {
       controller.abort();
     };
   }, []);
 
-  const equip = useCallback(
-    (itemId: string, slot: EquipSlot) => {
+  const equipItem = useCallback(
+    (itemId: string, equipSlot: EquipSlot) => {
       dispatch({
         type: 'EQUIP_ITEM',
-        payload: { itemId, slot },
+        payload: { itemId, equipSlot },
       });
     },
     [dispatch],
   );
-  const unEquip = useCallback(
-    (slot: EquipSlot) =>
+  const unEquipItem = useCallback(
+    (equipSlot: EquipSlot) =>
       dispatch({
         type: 'UNEQUIP_ITEM',
-        payload: slot,
+        payload: equipSlot,
       }),
     [dispatch],
   );
 
-  const totals = useMemo(() => {
+  const statTotals = useMemo(() => {
     return getTotalStats(state.equipped);
   }, [state.equipped]);
 
@@ -60,18 +60,18 @@ export const InventoryProvider = ({
       items: state.items,
       bag: state.bag,
       equipped: state.equipped,
-      totals,
-      equip,
-      unEquip,
+      statTotals,
+      equipItem,
+      unEquipItem,
     };
   }, [
     state.isLoading,
     state.items,
     state.bag,
     state.equipped,
-    totals,
-    equip,
-    unEquip,
+    statTotals,
+    equipItem,
+    unEquipItem,
   ]);
 
   return (
