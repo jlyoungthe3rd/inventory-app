@@ -1,7 +1,5 @@
 # 🎒 React Inventory System (RADIOT Architecture)
 
-> **Live Demo**: [Link to deployed site if applicable]
-
 A high-performance, type-safe inventory management system built with the bleeding-edge React ecosystem (React 19, Tailwind v4, Vite/Rolldown). This project demonstrates advanced state management patterns, strict TypeScript integration, and component composability.
 
 ## 🚀 Key Features
