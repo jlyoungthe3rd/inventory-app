@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useInventory } from '../../hooks/useInventory';
-import { type Rarity } from '../../types';
+import { type Item, type Rarity } from '../../types';
 import { Searchbar } from './SearchBar';
 
 const RARITY_WEIGHT: Record<Rarity, number> = {
@@ -22,6 +22,7 @@ export const Bag = () => {
 
     return [...allItems]
       .filter((item) => filterRarity === 'ALL' || item.rarity === filterRarity)
+      .filter((item): item is Item => !!item)
       .filter((item) =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase()),
       )
@@ -38,10 +39,19 @@ export const Bag = () => {
       });
   }, [bag, items, filterRarity, sortBy, searchTerm]);
 
+  if (isLoading) {
+    return (
+      <div className='bag-container'>
+        <Searchbar value={searchTerm} onChange={setSearchTerm} />
+        <div>Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <div className='bag-container'>
       <Searchbar value={searchTerm} onChange={setSearchTerm} />
-      {isLoading && filteredBag.length !== 0 && <div>Loading...</div>}
+
       <div className='bag-display'>
         {filteredBag.length === 0 ? (
           <div>No items found...</div>
