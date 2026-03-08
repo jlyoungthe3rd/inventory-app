@@ -4,6 +4,7 @@ import { getTotalStats } from '../state/inventoryUtils';
 import type { EquipSlot } from '../types';
 import { InventoryContext } from '../context/InventoryContext';
 import { fetchInitialBag } from '../services/itemServices';
+import { usePersistence } from '../hooks/usePersistence';
 
 export const InventoryProvider = ({
   children,
@@ -11,6 +12,7 @@ export const InventoryProvider = ({
   children: React.ReactNode;
 }) => {
   const [state, dispatch] = useReducer(inventoryReducer, initialState);
+  usePersistence(state, dispatch);
 
   useEffect(() => {
     const controller = new AbortController();

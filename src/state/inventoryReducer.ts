@@ -2,6 +2,7 @@ import type { InventoryState, InventoryAction, Item } from '../types';
 
 export const initialState: InventoryState = {
   isLoading: true,
+  loadedFromSave: false,
   items: {},
   bag: [],
   equipped: {
@@ -56,13 +57,21 @@ export const inventoryReducer = (
         return acc;
       }, {} as Record<string, Item>)
 
-      const newBagIds = action.payload.map(item => item.id)
+      const newBagIds = state.loadedFromSave
+        ? state.bag
+        : action.payload.map(item => item.id)
       return {
         ...state,
         items: newItems,
         bag: newBagIds,
         isLoading: false
       }
+    }
+    case 'LOAD_STATE': return {
+      ...state,
+      bag: action.payload.bag,
+      equipped: action.payload.equipped,
+      loadedFromSave: true,
     }
   }
 };

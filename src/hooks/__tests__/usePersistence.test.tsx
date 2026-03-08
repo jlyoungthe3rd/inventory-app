@@ -47,4 +47,46 @@ describe('usePersistence Hook', () => {
       }),
     );
   });
+
+  it('should load data from localStorage on mount', () => {
+    // Arrange
+    const mockState = {
+      bag: ['Item 1'],
+      equipped: {
+        MAIN_HAND: {
+          id: '1',
+          name: 'Iron Sword',
+          rarity: 'COMMON',
+          equipSlot: 'MAIN_HAND',
+          stats: {
+            str: 5,
+          },
+        },
+      },
+      isLoading: false,
+      items: {},
+    } as InventoryState;
+
+    localStorage.setItem(
+      'inventory_data',
+      JSON.stringify({
+        bag: mockState.bag,
+        equipped: mockState.equipped,
+      }),
+    );
+
+    const mockDispatch = vi.fn();
+
+    // Act
+    renderHook(() => usePersistence(mockState, mockDispatch));
+
+    // Assert
+    expect(mockDispatch).toHaveBeenCalledWith({
+      type: 'LOAD_STATE',
+      payload: {
+        bag: mockState.bag,
+        equipped: mockState.equipped,
+      },
+    });
+  });
 });

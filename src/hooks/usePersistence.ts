@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import type { InventoryAction, InventoryState } from "../types";
+import type { EquipSlot, InventoryAction, InventoryState, Item } from "../types";
 
 export const usePersistence = (
     state: InventoryState,
@@ -33,4 +33,22 @@ export const usePersistence = (
             }
         }
     }, [state.bag, state.equipped])
+
+    useEffect(() => {
+        try {
+            const inventoryData = window.localStorage.getItem('inventory_data')
+            if (!inventoryData) return
+            const parsedData = JSON.parse(inventoryData)
+            dispatch({
+                type: 'LOAD_STATE',
+                payload: parsedData as {
+                    bag: string[],
+                    equipped: Record<EquipSlot, Item | null>
+                }
+            })
+        } catch (err) {
+            console.error('Failed to load save:', err)
+        }
+
+    }, [dispatch])
 }
