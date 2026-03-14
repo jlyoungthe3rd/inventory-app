@@ -19,7 +19,7 @@ export const compendiumReducer = (
             return {
                 ...state,
                 isLoading: true,
-                error: null // good practice to clear errors on new fetches
+                error: null // best practice to clear errors on new fetches
             }
         }
         case 'FETCH_SUCCESS': {
