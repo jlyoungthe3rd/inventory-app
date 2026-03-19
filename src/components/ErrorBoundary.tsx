@@ -27,10 +27,10 @@ export class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <div className='p-4 max-w-6xl mx-auto'>
-          <div className='text-xl'>
-            <h1 className=''>Sorry.. there was an error</h1>
-            <a href='/'>Go back to home screen</a>
+        <div className='min-h-screen p-4 max-w-6xl mx-auto flex items-center justify-center'>
+          <div className='text-lg'>
+            <h1>Sorry.. there was an error</h1>
+            <a href='/' className='text-blue-600 underline hover:text-blue-300 transition'>Go back to home screen</a>
           </div>
         </div>
       );
