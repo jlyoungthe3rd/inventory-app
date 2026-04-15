@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useInventory } from '../../hooks/useInventory';
-import { type Item, type Rarity } from '../../types/items';
+import { type Item, type Rarity } from '../../types/item';
 import { Searchbar } from './SearchBar';
 
 const RARITY_WEIGHT: Record<Rarity, number> = {

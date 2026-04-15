@@ -1,4 +1,4 @@
-import type { InventoryState, InventoryAction, Item } from '../types/items';
+import type { InventoryState, InventoryAction, Item } from '../types/item';
 
 export const initialState: InventoryState = {
   isLoading: true,

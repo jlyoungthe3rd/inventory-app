@@ -1,4 +1,4 @@
-import type { Item } from "./items";
+import type { Item } from "./item";
 
 export type EquipSlot = 'HEAD' | 'CHEST' | 'LEGS' | 'BOOTS' | 'MAIN_HAND' | 'OFF_HAND' | 'TRINKET'
 

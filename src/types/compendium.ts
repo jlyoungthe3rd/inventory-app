@@ -1,4 +1,4 @@
-import { type Item, type Rarity } from "./items"
+import { type Item, type Rarity } from "./item"
 import type { EquipSlot } from "./inventory"
 
 export interface CompendiumItem extends Item {

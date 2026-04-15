@@ -1,5 +1,5 @@
 import { useInventory } from '../hooks/useInventory';
-import type { EquipSlot } from '../types/items';
+import type { EquipSlot } from '../types/item';
 
 export const EquippedInventory = () => {
   const { equipped, unEquipItem } = useInventory();
