@@ -1,4 +1,4 @@
-import type { Item } from "../types"
+import type { Item } from "../types/items"
 
 export const fetchInitialBag = async (): Promise<Item[]> => {
 

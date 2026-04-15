@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 export const SplashScreen = () => {
   return (
     <div className='min-h-screen flex justify-center items-center flex-col'>
-      <h1 className='mb-8 text-4xl font-bold text-gray 800'>
+      <h1 className='mb-8 text-4xl font-bold text-gray-800'>
         Game Master Tools
       </h1>
       <div className='flex gap-4'>

@@ -1,4 +1,5 @@
-import { type Item, type EquipSlot, type Rarity } from "."
+import { type Item, type Rarity } from "./items"
+import type { EquipSlot } from "./inventory"
 
 export interface CompendiumItem extends Item {
     descriptionHtml: string

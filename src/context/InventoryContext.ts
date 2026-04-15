@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import type { Item, EquipSlot } from "../types";
+import type { Item, EquipSlot } from "../types/items";
 
 export interface InventoryContextType {
     isLoading: boolean

@@ -1,7 +1,7 @@
 import { useReducer, useCallback, useMemo, useEffect } from 'react';
 import { initialState, inventoryReducer } from '../state/inventoryReducer';
 import { getTotalStats } from '../state/inventoryUtils';
-import type { EquipSlot } from '../types';
+import type { EquipSlot } from '../types/items';
 import { InventoryContext } from '../context/InventoryContext';
 import { fetchInitialBag } from '../services/itemServices';
 import { usePersistence } from '../hooks/usePersistence';

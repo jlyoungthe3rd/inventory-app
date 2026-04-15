@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { localStorageMock } from '../../tests/setup';
 
 import { usePersistence } from '../usePersistence';
-import type { InventoryState } from '../../types';
+import type { InventoryState } from '../../types/items';
 
 // Mock times for debounce testing
 vi.useFakeTimers();
