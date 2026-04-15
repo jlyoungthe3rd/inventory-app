@@ -22,5 +22,9 @@ export const handlers = [
             },
             descriptionHtml: "The smaller you are the more useful it is."
         }])
+    }),
+    http.post('/api/inventory/items', async ({ request }) => {
+        const item = await request.json()
+        return HttpResponse.json(item, { status: 201 })
     })
 ]
