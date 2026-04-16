@@ -23,3 +23,20 @@ export type CompendiumAction =
     | { type: 'FETCH_SUCCESS', payload: CompendiumItem[] }
     | { type: 'FETCH_ERROR', payload: string }
     | { type: 'SET_FILTER', payload: Partial<CompendiumFilters> }
+
+export interface RawCompendiumItem {
+    item_id: string
+    item_name: string
+    item_rarity: Rarity
+    equip_slot: EquipSlot
+    base_stats: {
+        hp?: number
+        str?: number
+        mp?: number
+        dex?: number
+        int?: number
+    },
+    description_html: string
+    created_at: string
+    internal_sku: string
+}
