@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
-import type { EquipSlot, InventoryAction, InventoryState, Item } from "../types/item";
+import type { EquipSlot, InventoryAction, InventoryState } from "../types/inventory";
+import { type Item } from "../types/item"
 
 export const usePersistence = (
     state: InventoryState,
