@@ -22,27 +22,30 @@ export function VirtualList<T>(props: VirtualListProps<T>) {
 
   return (
     <div
-      className="relative overflow-y-auto w-full border border-gray-300 rounded-md shadow-inner bg-white"
+      className='relative overflow-y-auto w-full border border-gray-300 rounded-md shadow-inner bg-white'
       style={{ height: props.containerHeight }}
       onScroll={handleScroll}
     >
-      <div className="w-full" style={{ height: props.items.length * props.itemHeight }}>
+      <ul
+        className='w-full'
+        style={{ height: props.items.length * props.itemHeight }}
+      >
         {visibleItems.map((item, localIndex) => {
           const trueIndex = startIndex + localIndex;
           return (
-            <div
+            <li
               key={trueIndex}
-              className="absolute top-0 left-0 w-full"
+              className='absolute top-0 left-0 w-full'
               style={{
                 height: props.itemHeight,
                 transform: `translateY(${trueIndex * props.itemHeight}px)`,
               }}
             >
               {props.renderItem(item, trueIndex)}
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   );
 }
