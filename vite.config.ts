@@ -9,6 +9,6 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true, // Output clearer (describe, it, expect) without imports
-    setupFiles: './src/tests/setup.ts', // (Optional, we might create this later)
+    setupFiles: './src/tests/setup.ts',
   }
 })
