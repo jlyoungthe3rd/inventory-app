@@ -4,7 +4,6 @@ import type { Item } from "../types/item"
 export const fetchInitialBag = async (): Promise<Item[]> => {
 
     try {
-        await new Promise(resolve => setTimeout(resolve, 1000))
         const response = await fetch('/items.json')
 
         if (!response.ok) {
@@ -20,7 +19,6 @@ export const fetchInitialBag = async (): Promise<Item[]> => {
 export const importItem = async (item: CompendiumItem): Promise<Item> => {
 
     try {
-        await new Promise(resolve => setTimeout(resolve, 1000))
         const response = await fetch('/api/inventory/items', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

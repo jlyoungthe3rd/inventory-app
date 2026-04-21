@@ -2,7 +2,6 @@ import type { CompendiumItem } from "../types/compendium"
 
 export const fetchCompendiumItems = async (): Promise<CompendiumItem[]> => {
     try {
-        await new Promise(resolve => setTimeout(resolve, 1000)) // fake delay for mock data
         const response = await fetch('/api/compendium')
 
         if (!response.ok) {
