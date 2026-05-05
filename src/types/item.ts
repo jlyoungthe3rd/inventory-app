@@ -14,6 +14,7 @@ export interface Item {
         dex?: number
         int?: number
 
-    }
+    },
+    dlc?: boolean
 }
 
