@@ -1,12 +1,13 @@
-import { useReducer, useState, useEffect, useMemo } from "react";
+import { useReducer, useEffect, useMemo } from "react";
 import { useDebounce } from "./useDebounce";
 import { fetchCompendiumItems } from "../services/compendiumService";
 import { compendiumReducer } from "../state/compendiumReducer";
 import { initialState } from "../state/compendiumReducer";
+import { useSessionStorage } from "./useSessionStorage";
 
 export const useCompendium = () => {
     const [state, dispatch] = useReducer(compendiumReducer, initialState);
-    const [searchText, setSearchText] = useState('');
+    const [searchText, setSearchText] = useSessionStorage('compendium_search', '');
 
     useEffect(() => {
         const loadWrapper = async () => {
