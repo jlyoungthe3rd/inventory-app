@@ -1,4 +1,5 @@
 import { useReducer, useState, useEffect, useMemo } from "react";
+import { useDebounce } from "./useDebounce";
 import { fetchCompendiumItems } from "../services/compendiumService";
 import { compendiumReducer } from "../state/compendiumReducer";
 import { initialState } from "../state/compendiumReducer";
@@ -32,11 +33,13 @@ export const useCompendium = () => {
         loadWrapper();
     }, []);
 
+    const debounceSearchText = useDebounce(searchText, 300)
+
     const filteredItems = useMemo(() => {
         return state.items.filter((item) =>
-            item.name.toLowerCase().includes(searchText.toLowerCase()),
+            item.name.toLowerCase().includes(debounceSearchText.toLowerCase()),
         );
-    }, [state.items, searchText]);
+    }, [state.items, debounceSearchText]);
 
     return { filteredItems, searchText, setSearchText, isLoading: state.isLoading, error: state.error, }
 }
