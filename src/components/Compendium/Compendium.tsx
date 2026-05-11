@@ -3,10 +3,27 @@ import { VirtualList } from '../VirtualList/VirtualList';
 import type { CompendiumItem } from '../../types/compendium';
 import { CompendiumRow } from './CompendiumRow';
 import { useCompendium } from '../../hooks/useCompendium';
+import { Accordion } from '../Accordion';
+
+const SORT_OPTIONS = [
+  { key: 'id', label: 'ID' },
+  { key: 'hp', label: 'HP' },
+  { key: 'mp', label: 'MP' },
+  { key: 'str', label: 'STR' },
+  { key: 'dex', label: 'DEX' },
+  { key: 'int', label: 'INT' },
+] as const;
 
 export const Compendium = () => {
-  const { filteredItems, searchText, setSearchText, isLoading, error } =
-    useCompendium();
+  const {
+    filteredItems,
+    searchText,
+    setSearchText,
+    isLoading,
+    error,
+    handleSortChange,
+    sortState,
+  } = useCompendium();
 
   const [activeRowIndex, setActiveRowIndex] = useState<number>(0);
 
@@ -52,7 +69,9 @@ export const Compendium = () => {
     <div className='max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-md'>
       <h2 className='text-2xl font-bold mb-4 text-gray-800'>Item Compendium</h2>
       <div>
-        <label htmlFor='search-input' className='sr-only'>Search the Compendium </label>
+        <label htmlFor='search-input' className='sr-only'>
+          Search the Compendium{' '}
+        </label>
         <input
           id='search-input'
           autoFocus
@@ -61,6 +80,26 @@ export const Compendium = () => {
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         ></input>
+        <Accordion
+          title={`Sorted by ${sortState.key.toLocaleUpperCase()} ${sortState.direction === 'asc' ? '▲' : '▼'}`}
+        >
+          {SORT_OPTIONS.map(({ key, label }) => {
+            const isActive = sortState.key === key;
+
+            return (
+              <button
+                key={key}
+                onClick={() => handleSortChange(key)}
+                aria-sort={
+                  isActive ? `${sortState.direction}ending` : undefined
+                }
+                className={`block w-full text-left p-2 hover:bg-gray-100 ${isActive ? `bg-blue-100 hover:bg-blue-100` : ''} `}
+              >
+                Sort by {label}{' '}
+              </button>
+            );
+          })}
+        </Accordion>
         <p aria-live='polite'>{filteredItems.length} results found</p>
       </div>
       <VirtualList

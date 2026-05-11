@@ -40,6 +40,7 @@ export const CompendiumRow = memo(function CompendiumRow(
       aria-pressed={props.isInspected}
       tabIndex={props.tabIndex}
       onKeyDown={(e) => props.onKeyDown(e, props.index)}
+      data-testid='compendium-list'
     >
       <strong className='text-gray-900 font-semibold'>
         #{props.index}: {props.item.name}
